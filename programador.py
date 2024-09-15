@@ -7,6 +7,7 @@ class Programador:
 
     def menu_principal(self):
         while True:
+            print("\nBienvenido al menú principal de tu gestor de tareas")
             print("\n--- Gestor de Tareas ---")
             print("1. Agregar Tarea")
             print("2. Tachar Tarea como Hecha")
