@@ -4,13 +4,13 @@ import sys
 import datetime
 from main import Main
 import threading  
+from interface import Interface
 
 c_negro = '#010101'
 c_blanco = '#FFFFFF'
 c_azul = '#87CEEB'
 user_data_file = 'users.txt'
 
-# Ruta del logo
 logo = 'C:/Users/lenovo/Dropbox/Mi PC (LAPTOP-DL0G2Q4C)/Downloads/CORRECCION/imagenes/logo3.png'
 
 root = CTk()
@@ -36,7 +36,6 @@ frame.rowconfigure([0, 1, 2, 3, 4, 5], weight=1)
 root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)
 
-# Crear un label para mostrar el logo
 CTkLabel(frame, text='', image=logo_image, fg_color=c_negro).grid(columnspan=2, row=0)
 
 usuario_entry = CTkEntry(frame, font=('Arial', 12), placeholder_text="Usuario", border_color=c_azul, fg_color=c_negro, width=220, height=40)
@@ -76,9 +75,8 @@ def mostrar_bienvenida(nombre_usuario):
 
 def esperar_y_cambiar_ventana(nombre_usuario):
     import time
-    time.sleep(5)  # Esperar 5 segundos
+    time.sleep(5)
     
-    # Crear una nueva ventana y destruir la actual
     root.after(0, lambda: [root.destroy(), crear_nueva_ventana(nombre_usuario)])
 
 def crear_nueva_ventana(nombre_usuario):
@@ -88,7 +86,6 @@ def crear_nueva_ventana(nombre_usuario):
     nueva_ventana.minsize(400, 500)
     nueva_ventana.config(bg=c_negro)
 
-    # Crear el frame en la nueva ventana
     frame_botonera = CTkFrame(nueva_ventana, fg_color=c_negro)
     frame_botonera.grid(column=0, row=0, sticky='nsew', padx=50, pady=50)
     frame_botonera.columnconfigure([0,1], weight= 1)  
@@ -100,7 +97,7 @@ def crear_nueva_ventana(nombre_usuario):
 
     nueva_ventana.mainloop()
 
-# Agregar los botones que permiten gestionar las tareas
+
 def mostrar_botones(frame, root):
     botones_textos = [
         'Agregar Tarea',
@@ -122,7 +119,6 @@ def mostrar_botones(frame, root):
         btn = CTkButton(frame, text=texto, font=('Arial', 12), border_color= c_azul, fg_color= c_negro, hover_color= c_azul, corner_radius=12, border_width=2, command=comando)
         btn.grid(column=0, row=i, padx=4, pady=4, sticky="ew")
 
-# Definir las funciones de cada acción
 def agregar_tarea(root):
     ventana_tarea = CTkToplevel(root)
     ventana_tarea.title("Agregar Tarea")
@@ -161,7 +157,6 @@ def guardar_tarea(tarea, fecha):
         file.write(f'{tarea} - {fecha}\n')
     print(f"Tarea guardada: {tarea} - {fecha}")
 
-# Función para tachar una tarea como hecha
 def tachar_tarea(root):
     ventana_tachar = CTkToplevel(root)
     ventana_tachar.title("Tachar Tarea")
@@ -211,7 +206,6 @@ def guardar_tareas(tareas):
     with open('tareas.txt', 'w') as file:
         file.writelines(tareas)
 
-# Función para mostrar todas las tareas
 def mostrar_tareas(root):
     ventana_mostrar = CTkToplevel(root)
     ventana_mostrar.title("Mostrar Tareas")
@@ -230,7 +224,6 @@ def mostrar_tareas(root):
     cerrar_btn = CTkButton(ventana_mostrar, text="Cerrar",font=('Arial', 12), border_color= c_azul, fg_color= c_negro, hover_color= c_azul, corner_radius=12, border_width=2, command=ventana_mostrar.destroy)
     cerrar_btn.pack(pady=10)
 
-# Función para recordar una tarea importante
 def recordar_tarea(root):
     ventana_recordar = CTkToplevel(root)
     ventana_recordar.title("Recordar Tarea Importante")

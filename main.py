@@ -2,7 +2,7 @@ from user_concre import ConcretoUsuario
 from programador import Programador
 import os
 
-# Ruta del archivo de datos de usuario
+
 USER_DATA_FILE = 'users.txt'
 
 class Main:
@@ -11,7 +11,6 @@ class Main:
         self.programador = None
 
     def run(self):
-        # Solicitar y verificar credenciales del usuario
         nombre, contraseña = self.solicitar_datos_registro()
         
         if self.verificar_credenciales(nombre, contraseña):
@@ -27,7 +26,6 @@ class Main:
                 print("Error: No se pudo registrar el usuario")
 
     def solicitar_datos_registro(self):
-        # Validar que el usuario y contraseña no sean vacíos
         while True:
             nombre = input("Ingrese su nombre de usuario: ").strip()
             contraseña = input("Ingrese su contraseña: ").strip()
@@ -43,7 +41,6 @@ class Main:
             
             with open(USER_DATA_FILE, 'r') as file:
                 for line in file:
-                    # Saltar líneas vacías o incorrectamente formateadas
                     if ',' not in line or line.strip() == '':
                         continue
                     
